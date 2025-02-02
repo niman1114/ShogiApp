@@ -1,0 +1,124 @@
+/* 全体のスクロール無効＆レスポンシブ */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: center;
+  max-width: 100vw;
+  max-height: 100vh;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+/* 盤面：外枠は背景のみ */
+.board {
+  display: inline-block;
+  background: #e8d1b2;
+}
+
+.board-row {
+  display: flex;
+}
+
+.board-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  text-align: center;
+  line-height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+  background: linear-gradient(135deg, #f0e4d7, #e8d1b2);
+}
+
+/* 選択中 */
+.board-cell.selected {
+  background: yellow !important;
+}
+
+/* 合法手候補 */
+.board-cell.legal {
+  background: lightgreen !important;
+}
+
+/* 最後の手：赤い枠を :after 擬似要素で全辺に表示 */
+.board-cell.last-move {
+  position: relative;
+}
+.board-cell.last-move::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid red;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.opponent-piece {
+  display: inline-block;
+  transform: rotate(180deg);
+}
+
+.hand-area {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.hand {
+  border: 2px solid #000;
+  padding: 10px;
+  width: 200px;
+  margin: 10px;
+  background: #f7e6d6;
+}
+
+.hand h3 {
+  margin: 0 0 10px;
+}
+
+.hand button {
+  font-size: 20px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.turn-indicator {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.game-over {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  border: 2px solid #000;
+  padding: 10px 20px;
+  z-index: 10;
+}
+
+@media (max-width: 600px) {
+  .board-cell {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 20px;
+  }
+  .hand {
+    width: 150px;
+  }
+  .hand button {
+    font-size: 16px;
+  }
+}
